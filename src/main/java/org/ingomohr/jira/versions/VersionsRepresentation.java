@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-@SuppressWarnings("UnusedDeclaration")
 @XmlRootElement
 public class VersionsRepresentation {
 
@@ -17,13 +16,24 @@ public class VersionsRepresentation {
 	private List<VersionRepresentation> versions;
 
 	public VersionsRepresentation() {
-		versions = null;
+		this(null);
 	}
 
 	public VersionsRepresentation(Iterable<VersionRepresentation> versions) {
 		this.versions = new ArrayList<>();
-		for (VersionRepresentation version : versions) {
-			this.versions.add(version);
+		if (versions != null) {
+			for (VersionRepresentation version : versions) {
+				this.versions.add(version);
+			}
 		}
 	}
+
+	public List<VersionRepresentation> getVersions() {
+		return versions;
+	}
+
+	public void setVersions(List<VersionRepresentation> versions) {
+		this.versions = versions;
+	}
+
 }
