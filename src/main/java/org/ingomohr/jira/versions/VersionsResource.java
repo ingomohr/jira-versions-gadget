@@ -1,9 +1,6 @@
 package org.ingomohr.jira.versions;
 
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,7 +14,6 @@ import javax.ws.rs.core.Response;
 
 import com.atlassian.jira.permission.ProjectPermissions;
 import com.atlassian.jira.project.Project;
-import com.atlassian.jira.project.version.Version;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.user.ApplicationUser;
@@ -46,27 +42,13 @@ public class VersionsResource {
 
 		ApplicationUser user = authenticationContext.getLoggedInUser();
 
-		List<Version> versions = getReleasedVersions(user);
+		Collection<Project> projects = permissionManager.getProjects(ProjectPermissions.BROWSE_PROJECTS, user);
 
-		// convert the project objects to ProjectRepresentations
-		Collection<VersionRepresentation> preps = new LinkedList<>();
-		versions.forEach(version -> preps.add(new VersionRepresentation(version)));
-		VersionsRepresentation allVersions = new VersionsRepresentation(preps);
+		VersionsRepresentation rep = new VersionsRepresentationProvider().getVersionsRepresentation(projects);
 
 		// return the project representations. JAXB will handle the conversion
 		// to XML or JSON.
-		return Response.ok(allVersions).build();
-	}
-
-	private List<Version> getReleasedVersions(ApplicationUser user) {
-		Collection<Project> projects = permissionManager.getProjects(ProjectPermissions.BROWSE_PROJECTS, user);
-		List<Version> versions = projects.stream()
-				.flatMap(pProject -> pProject.getVersions().stream().filter(pVersion -> pVersion.isReleased()))
-				.sorted((v1, v2) -> {
-					return v2.getReleaseDate().compareTo(v1.getReleaseDate());
-				}).collect(Collectors.toList());
-
-		return versions;
+		return Response.ok(rep).build();
 	}
 
 }
