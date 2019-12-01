@@ -29,20 +29,29 @@
                         template: function(args) {
                             var gadget = this;
                             
-                            var versionList = AJS.$("<table/>");
+                            var versionList = AJS.$("<table id=\"sortableVersionsTable\" class=\"aui aui-table-sortable\"/>");
+                            
                             versionList.append(
+	                            AJS.$("<thead/>").append(
                                     AJS.$("<tr/>").append(
                                     	AJS.$("<th/>").text("Version"),
 	                                    AJS.$("<th/>").text("Project"),
 	                                    AJS.$("<th/>").text("Release Date"),
 	                                    AJS.$("<th/>").text("Description")
 	                                )
+                                )
 	                        );
-
+	                        
+	                        var body = AJS.$("<tbody/>");
+	                        
                             AJS.$(args.versionData.versions).each(function() {
-                                versionList.append(
+                                body.append(
                                     AJS.$("<tr/>").append(
 	                                    AJS.$("<td/>").append(
+	                                        AJS.$("<span/>").attr({
+	                                        	class: "aui-icon aui-icon-success"
+	                                        }).text("&nbsp;"),
+	                                    
 	                                        AJS.$("<a/>").attr({
 	                                            target: "_parent",
 	                                            title: gadgets.util.escapeString(this.id),
@@ -55,6 +64,8 @@
 	                                )
                                 );
                             });
+                            
+                            versionList.append(body);
 
                             gadget.getView().html(versionList);
                         },
