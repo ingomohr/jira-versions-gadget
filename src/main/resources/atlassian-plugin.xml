@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <atlassian-plugin key="${atlassian.plugin.key}"
                   name="Versions Gadget"
                   pluginsVersion="2">
@@ -27,5 +28,10 @@
     <rest key="jira-versions-gadget-rest-resources" path="jira-versions-gadget" version="1.0">
         <description>Provides the REST resource for the version list.</description>
     </rest>
+    
+    <web-resource key="jira-versions-gadget-resources" name="jira-versions-gadget Web Resources">
+        <dependency>com.atlassian.auiplugin:aui-core</dependency>
+        <dependency>com.atlassian.auiplugin:aui-table-sortable</dependency>
+    </web-resource>
 
 </atlassian-plugin>

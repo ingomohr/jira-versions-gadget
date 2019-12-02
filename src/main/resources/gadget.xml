@@ -18,6 +18,7 @@
         <![CDATA[
         #requireResource("com.atlassian.jira.gadgets:common")
         #requireResource("com.atlassian.gadgets.publisher:ajs-gadgets")
+        #requireResource("org.ingomohr.jira.jira-versions-gadget:jira-versions-gadget-resources")
         #includeResources()
         
         <script type="text/javascript">
@@ -34,6 +35,7 @@
                             versionList.append(
 	                            AJS.$("<thead/>").append(
                                     AJS.$("<tr/>").append(
+                                    	AJS.$("<th/>"),
                                     	AJS.$("<th/>").text("Version"),
 	                                    AJS.$("<th/>").text("Project"),
 	                                    AJS.$("<th/>").text("Release Date"),
@@ -49,15 +51,18 @@
                                     AJS.$("<tr/>").append(
 	                                    AJS.$("<td/>").append(
 	                                        AJS.$("<span/>").attr({
-	                                        	class: "aui-icon aui-icon-success"
-	                                        }).text("&nbsp;"),
+	                                        	class: "aui-lozenge aui-lozenge-success"
+	                                        }).text("RELEASED")
+	                                    ),
 	                                    
-	                                        AJS.$("<a/>").attr({
-	                                            target: "_parent",
-	                                            title: gadgets.util.escapeString(this.id),
-	                                            href: "__ATLASSIAN_BASE_URL__" + "/projects/" + this.projectKey + "/versions/" + this.id
+	                                    AJS.$("<td/>").append(
+		                                    AJS.$("<a/>").attr({
+		                                            target: "_parent",
+		                                            title: gadgets.util.escapeString(this.id),
+		                                            href: "__ATLASSIAN_BASE_URL__" + "/projects/" + this.projectKey + "/versions/" + this.id
 	                                        }).text(this.name)        
-                                        ),
+	                                    ),
+	                                    
 	                                    AJS.$("<td/>").text(this.projectKey),
 	                                    AJS.$("<td/>").text(this.releaseDate),
 	                                    AJS.$("<td/>").text(this.description)
