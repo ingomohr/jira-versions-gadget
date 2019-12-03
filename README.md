@@ -14,11 +14,21 @@ This is a Jira plug-in with a dashboard gadget to list released versions.
 ### Example
 ![Example](/doc/example.png)
 
+### How to Install to Jira
+* Open your Jira installation and in it "Manage Apps" in the System Settings.
+* Upload the JAR from the release (or from the project's ``/target`` folder - if you built the plug-in locally).
+* Create or open a Dashboard and add the gadget "Released Versions".
+
 ### How to Deploy
 Note: See [Dev-Notes](https://github.com/ingomohr/jira-versions-gadget/wiki/Dev-Notes) for Atlassian developer documentation.
 
 * Open terminal on project folder (the one with the ``pom.xml`` in it.
 * Call ``atlas-mvn package``
-* Open your Jira installation and in it "Manage Apps" in the System Settings.
-* Upload the *.jar from the ``/target`` folder
-* Create or open a Dashboard and add the gadget "Released Versions".
+* This will create the JAR. You just have to upload it to your server.
+
+### How to Develop
+Note: See [Dev-Notes](https://github.com/ingomohr/jira-versions-gadget/wiki/Dev-Notes) for Atlassian developer documentation.
+
+* Open terminal on project folder (the one with the ``pom.xml`` in it.
+* Call ``atlas-run`` or ``atlas-debug``(see Atlassian documentation for more).
+* This will (re)build and (re)test your plug-in and then start a Jira Server with the plug-in installed.
