@@ -33,15 +33,15 @@
                             var versionList = AJS.$("<table id=\"sortableVersionsTable\" class=\"aui aui-table-sortable\"/>");
                             
                             versionList.append(
-	                            AJS.$("<thead/>").append(
-                                    AJS.$("<tr/>").append(
+                            	AJS.$("<thead/>").append(
+                                	AJS.$("<tr/>").append(
                                     	AJS.$("<th/>"),
                                     	AJS.$("<th/>").text("Version"),
 	                                    AJS.$("<th/>").text("Project"),
 	                                    AJS.$("<th/>").text("Release Date"),
 	                                    AJS.$("<th/>").text("Description")
-	                                )
-                                )
+                                    )
+                            	)
 	                        );
 	                        
 	                        var body = AJS.$("<tbody/>");
