@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <atlassian-plugin key="${atlassian.plugin.key}"
-                  name="Versions Gadget"
-                  pluginsVersion="2">
-    <!-- Contains plugin metadata. -->
-    <plugin-info>
-        <description>Provides a dashboard gadget to show versions</description>
-        <vendor name="Ingo Mohr" url="http://www.ingomohr.org"/>
-        <version>1.0</version>
-    </plugin-info>
+	name="${project.name}" pluginsVersion="2">
+	<plugin-info>
+		<version>${project.version}</version>
+	</plugin-info>
 
-    <!--
-        Registers the gadget spec as a plugin module. This allows the gadget to
-        appear in the gadget directory and also allows administrators to
-        disable/enable the gadget.
-     -->
-    <gadget key="jira-versions-gadget" name="Versions Gadget" location="gadget.xml"/>
+	<resource
+		type="download"
+		name="jira-versions-thumbnail.png"
+		location="jira-versions-thumbnail.png"/>
 
-    <!-- Makes the gadget Locale messages available for the gadget's use. -->
-    <resource type="download" name="i18n/ALL_ALL.xml" location="i18n/ALL_ALL.xml">
-        <param name="content-type" value="text/xml; charset=UTF-8"/>
-    </resource>
+	<web-resource key="resources">
+		<resource type="download" name="jira-versions.js"
+			location="jira-versions.js">
+			<property key="content-type" value="text/javascript" />
+		</resource>
+		<resource type="download" name="jira-versions.css"
+			location="jira-versions.css">
+			<property key="content-type" value="text/css" />
+		</resource>
+	</web-resource>
 
-    <!--
-        Automatically finds all JAX-RS resource classes in the plugin and
-        publishes them.
-     -->
-    <rest key="jira-versions-gadget-rest-resources" path="jira-versions-gadget" version="1.0">
-        <description>Provides the REST resource for the version list.</description>
-    </rest>
-    
-    <web-resource key="jira-versions-gadget-resources" name="jira-versions-gadget Web Resources">
-        <dependency>com.atlassian.auiplugin:aui-core</dependency>
-        <dependency>com.atlassian.auiplugin:aui-table-sortable</dependency>
-    </web-resource>
-
+	<gadget key="jira-versions" location="jira-versions.xml" />
 </atlassian-plugin>

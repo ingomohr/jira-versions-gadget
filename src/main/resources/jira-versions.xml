@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="__MSG_gadget.title__" directory_title="__MSG_gadget.title__" description="__MSG_gadget.description__">
-        <Optional feature="gadget-directory">
-            <Param name="categories">
-                JIRA
-            </Param>
-        </Optional>
-        <Optional feature="atlassian.util" />
-        <Optional feature="auth-refresh" />
-        <Require feature="views" />
-        <Require feature="settitle"/>
-        <Require feature="oauthpopup" />
-        #oauth
-        <Locale messages="__ATLASSIAN_BASE_URL__/download/resources/org.ingomohr.jira.jira-versions-gadget/i18n/ALL_ALL.xml"/>
-    </ModulePrefs>
-    <Content type="html" view="profile">
-        <![CDATA[
-        #requireResource("com.atlassian.jira.gadgets:common")
-        #requireResource("com.atlassian.gadgets.publisher:ajs-gadgets")
-        #requireResource("org.ingomohr.jira.jira-versions-gadget:jira-versions-gadget-resources")
-        #includeResources()
-        
-        <script type="text/javascript">
+  <ModulePrefs
+    title="JIRA Versions"
+    author="Ingo Mohr"
+    thumbnail=
+      '#staticResourceUrl("org.ingomohr.jira.jira-versions-gadget:jira-versions",
+         "jira-versions-thumbnail.png")'
+    description="A list of recently released versions">
+
+    <Require feature="minimessage" />
+    <Require feature="dynamic-height" />
+
+  </ModulePrefs>
+
+  <UserPref
+    name="show_date"
+    display_name="Show Dates?"
+    datatype="bool"
+    default_value="true"/>
+  <UserPref
+    name="show_summ"
+    display_name="Show Summaries?"
+    datatype="bool"
+    default_value="true"/>
+  <UserPref
+    name="num_entries"
+    display_name="Number of Entries:"
+    default_value="5"
+    required="true"/>
+
+  <Content type="html"><![CDATA[
+    #requireResource("org.ingomohr.jira.jira-versions-gadget:resources")
+    #includeResources()
+    <script>
             (function () {
                 var gadget = AJS.Gadget({
                     baseUrl: "__ATLASSIAN_BASE_URL__",
@@ -85,7 +96,8 @@
                     }
                 });
             })();
-        </script>
-        ]]>
-    </Content>
+    </script>
+
+    <div id="content_div"></div>
+  ]]></Content>
 </Module>

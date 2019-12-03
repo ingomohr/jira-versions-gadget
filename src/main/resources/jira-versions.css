@@ -1,0 +1,39 @@
+#content_div {
+  font-size: 80%;
+  background-color: #FFF;
+}
+
+.title {
+  background-color: #E8EEF7;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px;
+}
+
+.jira-item {
+  margin: 5px;
+}
+
+.jira-item a {
+  color: #0060BF;
+}
+
+.jira-item-date {
+  color: #909090;
+  font-size: x-small;
+  text-align: right;
+}
+
+.jira-item-desc {
+  color: #535353;
+  font-size: small;
+  padding: 0.5em;
+}
+
+.mmlib_table {
+  background-color: #8b0000;
+  color: white;
+  font-size: xx-large;
+  padding: 15px;
+  text-align: center;
+}

@@ -9,7 +9,7 @@
     <artifactId>jira-versions-gadget</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>jira-versions-gadget</name>
+    <name>Jira Versions Gadget</name>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
