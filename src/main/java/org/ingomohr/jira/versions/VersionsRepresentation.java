@@ -26,6 +26,7 @@ public class VersionsRepresentation {
 				this.versions.add(version);
 			}
 		}
+		this.versions.sort(new VersionRepresentationComparator());
 	}
 
 	public List<VersionRepresentation> getVersions() {

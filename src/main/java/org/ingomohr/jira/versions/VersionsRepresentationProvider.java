@@ -31,9 +31,9 @@ public class VersionsRepresentationProvider {
 			versions = versions.subList(0, 20);
 		}
 
-		Collection<VersionRepresentation> reps = new LinkedList<>();
-		versions.forEach(version -> reps.add(new VersionRepresentation(version)));
-		VersionsRepresentation allVersions = new VersionsRepresentation(reps);
+		Collection<VersionRepresentation> versionReps = new LinkedList<>();
+		versions.forEach(version -> versionReps.add(new VersionRepresentation(version)));
+		VersionsRepresentation allVersions = new VersionsRepresentation(versionReps);
 
 		return allVersions;
 	}

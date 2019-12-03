@@ -29,6 +29,9 @@ public class VersionRepresentation {
 	private String releaseDate;
 
 	@XmlElement
+	private Date releaseDateObject;
+
+	@XmlElement
 	private Project project;
 
 	@XmlElement
@@ -47,6 +50,7 @@ public class VersionRepresentation {
 		id = version.getId();
 
 		Date date = version.getReleaseDate();
+		this.releaseDateObject = date;
 		if (date != null) {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			releaseDate = dateFormat.format(date);
@@ -94,6 +98,14 @@ public class VersionRepresentation {
 		this.releaseDate = releaseDate;
 	}
 
+	public Date getReleaseDateObject() {
+		return releaseDateObject;
+	}
+
+	public void setReleaseDateObject(Date releaseDateObject) {
+		this.releaseDateObject = releaseDateObject;
+	}
+
 	public Project getProject() {
 		return project;
 	}
@@ -121,8 +133,8 @@ public class VersionRepresentation {
 	@Override
 	public String toString() {
 		return "VersionRepresentation [id=" + id + ", name=" + name + ", description=" + description + ", releaseDate="
-				+ releaseDate + ", project=" + project + ", projectKey=" + projectKey + ", projectName=" + projectName
-				+ "]";
+				+ releaseDate + ", releaseDateObject=" + releaseDateObject + ", project=" + project + ", projectKey="
+				+ projectKey + ", projectName=" + projectName + "]";
 	}
 
 }
