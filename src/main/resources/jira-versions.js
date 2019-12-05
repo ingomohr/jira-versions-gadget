@@ -10,131 +10,87 @@ var showSummary = prefs.getBool("show_summ");
 var numEntries = prefs.getInt("num_entries");
 
 // Fetch issues when the gadget loads
-// gadgets.util.registerOnLoadHandler(fetchVersions);
+gadgets.util.registerOnLoadHandler(fetchVersions);
 
-function fetchVersions() {
+function fetchVersions(url) {
 
-	console.log("Fetching versions...");
+	console.log("Fetching versionsx...");
 
-	// Construct request parameters object
-	var params = {};
-	// Indicate that the response is XML
-	params[gadgets.io.RequestParameters.CONTENT_TYPE] =
-		gadgets.io.ContentType.DOM;
+	// // Construct request parameters object
+	// var params = {};
+	// // Indicate that the response is XML
+	// params[gadgets.io.RequestParameters.CONTENT_TYPE] =
+	// 	gadgets.io.ContentType.DOM;
 
-	// Proxy the request through the container server
-	gadgets.io.makeRequest(url, handleResponse, params);
+	// // Proxy the request through the container server
+	// gadgets.io.makeRequest(url, handleResponse, params);
+
+	renderVersions();
+	msg.dismissMessage(loadMessage);
+	gadgets.window.adjustHeight();
 }
 
-function handleResponse(obj) {
-	// obj.data contains a Document DOM element
-	// parsed from the XML that was requested
-	var domData = obj.data;
-
-	console.log("Found DOM data: " + domData);
-	
-	var children = Array.prototype.slice.call(domData.childNodes);
-	console.log("Found DOM data children: " + children.length);
-	
-	children.forEach(function(child){
-		console.log("DomData name: " + child.msg);
-	});
-	
-
-	// Process the DOM data into a JavaScript object
-	var versions = {
-		title: getTitle(domData),
-		items: getItems(domData)
-	};
+/**
+ * Handles the response from the server.
+ * 
+ * @param data the response data to handle
+ */
+function handleResponse(data) {
+	var versions = {};
 	renderVersions(versions);
 
 	msg.dismissMessage(loadMessage);
 	gadgets.window.adjustHeight();
 }
 
-function printChild(child) {
-	console.log("Printing child: " + child);
-	
-	
-}
-
-function getTitle(domData) {
-	// Return the feed title
-	// This function just grabs the first element named "title"
-	var titles = domData.getElementsByTagName("title");
-	return titles.item(0).firstChild.nodeValue;
-}
-
-function getItems(domData) {
-
-	// Items to return
-	var items = [];
-	// Get a list of the <item> element nodes in the file
-	var itemNodes = domData.getElementsByTagName("item");
-	// Loop through all <item> nodes
-	for (var i = 0; i < itemNodes.length && i < numEntries; i++) {
-		var item = {};
-
-		// For each <item> node, get child nodes.
-		var childNodes = itemNodes.item(i).childNodes;
-		// Loop through child nodes.
-		for (var j = 0; j < childNodes.length; j++) {
-			// Extract data from title, description, link,
-			// and updated date child nodes
-			var childNode = childNodes.item(j);
-			if (!isElement(childNode) || !childNode.firstChild) {
-				continue;
-			}
-			switch (childNode.nodeName) {
-				case "title":
-					item.name = childNode.firstChild.nodeValue;
-					break;
-				case "description":
-					item.desc = childNode.firstChild.nodeValue;
-					break;
-				case "link":
-					item.link = childNode.firstChild.nodeValue;
-					break;
-				case "updated":
-					item.date = childNode.firstChild.nodeValue;
-					break;
-			}
-		}
-		items.push(item);
-	}
-	return items;
-}
-
-function isElement(node) {
-	return node.nodeType == 1;
-}
-
+/**
+ * Renders the versions to HTML.
+ */
 function renderVersions(versions) {
-	var html =
-		"<div class='title'>" +
-		versions.title +
-		"</div>";
-	for (var i = 0; i < versions.items.length; i++) {
-		var item = versions.items[i];
-		html +=
-			"<div class='jira-item'>" +
-			"<a target='_blank' href='" + item.link + "'>" +
-			item.name +
-			"</a>";
-		if (showDate) {
-			html +=
-				"<div class='jira-item-date'>" +
-				item.date +
-				"</div>";
-		}
-		if (showSummary) {
-			html +=
-				"<div class='jira-item-desc'>" +
-				item.desc +
-				"</div>";
-		}
-		html += "</div>";
-	}
+
+	let tr1 = mkTr(mkVersion("1.0.0", "2019-12-05", "description v1"));
+	let tr2 = mkTr(mkVersion("0.9.0", "2019-12-04", "description v0.9"));
+
+	let thead = "<thead><th>Name</th><th>Release Date</th><th>Description</th></thead>";
+	let tbody = "<tbody>" + tr1 + tr2 + "</tbody>";
+
+	let table = "<table " + mkStyleTable() + ">" + thead + tbody + "</table";
+	let html = table;
 
 	document.getElementById('content_div').innerHTML = html;
+}
+
+function mkTr(versionRepresentation) {
+
+	let name = versionRepresentation.name;
+	let relDate = versionRepresentation.releaseDate;
+	let descr = versionRepresentation.description;
+
+	let tr = "<tr>" + mkTd(name) + mkTd(relDate) + mkTd(descr) + "</tr>";
+	return tr;
+}
+
+function mkStyleTable() {
+	return "style=\"width: 100%;font: 12px/18px Arial, Sans-serif;color: #333;background-color: #fff;border-spacing: 0;margin: 10px 0 15px;text-align: left\"";
+}
+
+function mkTd(val) {
+	return "<td>" + val + "</td>";
+}
+
+function mkVersion(name, releaseDate, description) {
+	return new VersionRepresentation(name, releaseDate, description);
+}
+
+/**
+ * Representation for a single fixVersion.
+ */
+class VersionRepresentation {
+
+	constructor(name, releaseDate, description) {
+		this.name = name;
+		this.releaseDate = releaseDate;
+		this.description = description;
+	}
+
 }

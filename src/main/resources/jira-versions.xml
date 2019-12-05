@@ -29,75 +29,16 @@
     default_value="5"
     required="true"/>
 
-  <Content type="html"><![CDATA[
-    #requireResource("org.ingomohr.jira.jira-versions-gadget:resources")
-    #includeResources()
-    <script>
-            (function () {
-                var gadget = AJS.Gadget({
-                    baseUrl: "__ATLASSIAN_BASE_URL__",
-                    useOauth: "/rest/gadget/1.0/currentUser",
-                    view: {
-                        template: function(args) {
-                            var gadget = this;
-                            
-                            var versionList = AJS.$("<table id=\"sortableVersionsTable\" class=\"aui aui-table-sortable\"/>");
-                            
-                            versionList.append(
-                            	AJS.$("<thead/>").append(
-                                	AJS.$("<tr/>").append(
-                                    	AJS.$("<th/>"),
-                                    	AJS.$("<th/>").text("Version"),
-	                                    AJS.$("<th/>").text("Project"),
-	                                    AJS.$("<th/>").text("Release Date"),
-	                                    AJS.$("<th/>").text("Description")
-                                    )
-                            	)
-	                        );
-	                        
-	                        var body = AJS.$("<tbody/>");
-	                        
-                            AJS.$(args.versionData.versions).each(function() {
-                                body.append(
-                                    AJS.$("<tr/>").append(
-	                                    AJS.$("<td/>").append(
-	                                        AJS.$("<span/>").attr({
-	                                        	class: "aui-lozenge aui-lozenge-success"
-	                                        }).text("RELEASED")
-	                                    ),
-	                                    
-	                                    AJS.$("<td/>").append(
-		                                    AJS.$("<a/>").attr({
-		                                            target: "_parent",
-		                                            title: gadgets.util.escapeString(this.id),
-		                                            href: "__ATLASSIAN_BASE_URL__" + "/projects/" + this.projectKey + "/versions/" + this.id
-	                                        }).text(this.name)        
-	                                    ),
-	                                    
-	                                    AJS.$("<td/>").text(this.projectKey),
-	                                    AJS.$("<td/>").text(this.releaseDate),
-	                                    AJS.$("<td/>").text(this.description)
-	                                )
-                                );
-                            });
-                            
-                            versionList.append(body);
-
-                            gadget.getView().html(versionList);
-                        },
-                        args: [{
-                            key: "versionData",
-                            ajaxOptions: function() {
-                                return {
-                                    url: "/rest/jira-versions-gadget/1.0/versions.json"
-                                };
-                            }
-                        }]
-                    }
-                });
-            })();
-    </script>
-
-    <div id="content_div"></div>
-  ]]></Content>
-</Module>
+  <Content type="html">
+  	<![CDATA[
+      #requireResource("org.ingomohr.jira.jira-versions-gadget:resources")
+	    <script>
+	      // Request URL for most recently created,
+	      // unresolved issues on this server
+	      var url = "__ATLASSIAN_BASE_URL__/rest/api/2/project";
+	    </script>
+	    #includeResources()
+	
+	    <div id="content_div"></div>
+	]]>
+  </Content></Module>

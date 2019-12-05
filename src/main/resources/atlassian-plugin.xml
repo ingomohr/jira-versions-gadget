@@ -15,8 +15,8 @@
 			location="jira-versions.js">
 			<property key="content-type" value="text/javascript" />
 		</resource>
-		<resource type="download" name="jira-versions.css"
-			location="jira-versions.css">
+		<resource type="download" name="theme.default.css"
+			location="theme.default.css">
 			<property key="content-type" value="text/css" />
 		</resource>
 	</web-resource>
