@@ -9,11 +9,14 @@
         <Optional feature="atlassian.util" />
         <Optional feature="auth-refresh" />
         <Require feature="views" />
+        <Require feature="dynamic-height"/>
         <Require feature="settitle"/>
-        <Require feature="oauthpopup" />
+ 		<Require feature="setprefs"/>
+        <Require feature="oauthpopup"/>
         #oauth
         <Locale messages="__ATLASSIAN_BASE_URL__/download/resources/org.ingomohr.jira.jira-versions-gadget/i18n/ALL_ALL.xml"/>
     </ModulePrefs>
+    <UserPref name="project_keys" display_name="Included projects" required="false" default_value="SAM"/>
     <Content type="html" view="profile">
         <![CDATA[
         #requireResource("com.atlassian.jira.gadgets:common")
@@ -31,7 +34,7 @@
                             var gadget = this;
                             
                             var versionList = AJS.$("<table id=\"sortableVersionsTable\" class=\"aui aui-table-sortable\"/>");
-                            
+
                             versionList.append(
                             	AJS.$("<thead/>").append(
                                 	AJS.$("<tr/>").append(
@@ -46,7 +49,9 @@
 	                        
 	                        var body = AJS.$("<tbody/>");
 	                        
-                            AJS.$(args.versionData.versions).each(function() {
+	                        let filteredVersions = filterVersions(args.versionData.versions);
+	                        
+                            AJS.$(filteredVersions).each(function() {
                                 body.append(
                                     AJS.$("<tr/>").append(
 	                                    AJS.$("<td/>").append(
@@ -85,6 +90,19 @@
                     }
                 });
             })();
+            
+            
+            function filterVersions(versions) {
+            	let prefs = "__UP_project_keys__";
+            	if (prefs === "") {
+            		return versions;
+            	} else {
+	            	let filteredVersions = versions.filter(v => prefs.includes(v.projectKey));
+	            	return filteredVersions;
+            	}
+            }
+            
+            
         </script>
         ]]>
     </Content>
