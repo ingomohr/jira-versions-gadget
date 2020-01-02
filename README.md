@@ -12,7 +12,12 @@ This is a Jira plug-in with a dashboard gadget to list released versions.
 
 
 ### Example
+#### Gadget w/o UP
 ![Example](/doc/example.png)
+
+#### Gadget with User-Preferences Displayed
+![Example-with-user-preferences](/doc/example-userprefs.png)
+
 
 ### How to Install to Jira
 * Open your Jira installation and in it "Manage Apps" in the System Settings.
