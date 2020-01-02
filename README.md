@@ -5,9 +5,10 @@ This is a Jira plug-in with a dashboard gadget to list released versions.
 * Tested with Jira Software (Server) 8.5.1
 
 ### Features
-* Lists the latest released fix versions (of all projects the current user has access to)
+* Lists the latest released fix versions
+* Includes versions of all projects the current user has access to (can be configured by user)
+* Displays maximum 10 versions by default (can be configured by user)
 * Ordered by release date (newest to oldest)
-* Displays maximum 20 versions
 * Each version links to the corresponding release hub
 
 
