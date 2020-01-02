@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-    <ModulePrefs title="__MSG_gadget.title__" directory_title="__MSG_gadget.title__" description="__MSG_gadget.description__">
+    <ModulePrefs title="__MSG_gadget.title__"
+    		author="Ingo Mohr"
+    		author_email="tellastory73@gmail.com"
+    		directory_title="__MSG_gadget.title__"
+    		description="__MSG_gadget.description__"
+    		thumbnail="https://github.com/ingomohr/jira-versions-gadget/releases/download/1.0/gadget-thumbnail.png">
+    		>
         <Optional feature="gadget-directory">
             <Param name="categories">
                 JIRA
