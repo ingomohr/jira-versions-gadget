@@ -27,8 +27,28 @@ Note: See [Dev-Notes](https://github.com/ingomohr/jira-versions-gadget/wiki/Dev-
 * This will create the JAR. You just have to upload it to your server.
 
 ### How to Develop
+#### Start Server
 Note: See [Dev-Notes](https://github.com/ingomohr/jira-versions-gadget/wiki/Dev-Notes) for Atlassian developer documentation.
 
 * Open terminal on project folder (the one with the ``pom.xml`` in it.
 * Call ``atlas-run`` or ``atlas-debug``(see Atlassian documentation for more).
 * This will (re)build and (re)test your plug-in and then start a Jira Server with the plug-in installed.
+
+Note: To stop the server, press CTRL+C (see log on terminal).
+
+#### Hot-Deploy new Build on Running Server
+* Open a new terminal while the Jira server is running. (again, open project folder)
+* Call ``atlas-mvn package``
+* This will rebuild and test your plug-in and redeploy it onto the running Jira server.
+
+
+#### Admin-User
+* The admin user credentials for your test server are "admin"/"admin".
+
+
+#### How to Change the Test Server Specs
+If you change the test-server specs by e.g. adding Jira Service Desk, you need to clean the server data to make your changes come to life.
+
+* Stop the server
+* On the project folder call ``atlas-clean``
+* Start the server again
