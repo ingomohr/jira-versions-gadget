@@ -6,7 +6,7 @@
     <plugin-info>
         <description>Provides a dashboard gadget to show versions</description>
         <vendor name="Ingo Mohr" url="http://www.ingomohr.org"/>
-        <version>1.0</version>
+        <version>1.1</version>
     </plugin-info>
 
     <!--
