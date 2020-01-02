@@ -16,7 +16,7 @@
         #oauth
         <Locale messages="__ATLASSIAN_BASE_URL__/download/resources/org.ingomohr.jira.jira-versions-gadget/i18n/ALL_ALL.xml"/>
     </ModulePrefs>
-    <UserPref name="project_keys" display_name="Included projects" required="false" default_value="SAM"/>
+    <UserPref name="project_keys" display_name="Included projects" required="false" default_value=""/>
     <Content type="html" view="profile">
         <![CDATA[
         #requireResource("com.atlassian.jira.gadgets:common")
