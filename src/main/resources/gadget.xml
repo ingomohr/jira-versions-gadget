@@ -17,6 +17,8 @@
         <Locale messages="__ATLASSIAN_BASE_URL__/download/resources/org.ingomohr.jira.jira-versions-gadget/i18n/ALL_ALL.xml"/>
     </ModulePrefs>
     <UserPref name="project_keys" display_name="Included projects" required="false" default_value=""/>
+    <UserPref name="max_num_versions" display_name="Max. versions" required="false" default_value="10"/>
+    
     <Content type="html" view="profile">
         <![CDATA[
         #requireResource("com.atlassian.jira.gadgets:common")
@@ -91,16 +93,29 @@
                 });
             })();
             
+   			function filterVersionsByProjectNames(versions) {
+				let prefs = "__UP_project_keys__";
+				if (prefs === "") {
+					return versions;
+				} else {
+					let filteredVersions = versions.filter(v => prefs.includes(v.projectKey));
+					return filteredVersions;
+				}
+			}
+ 
             
-            function filterVersions(versions) {
-            	let prefs = "__UP_project_keys__";
-            	if (prefs === "") {
-            		return versions;
-            	} else {
-	            	let filteredVersions = versions.filter(v => prefs.includes(v.projectKey));
-	            	return filteredVersions;
-            	}
-            }
+			function filterVersions(versions) {
+				let versionsByProjects = filterVersionsByProjectNames(versions);
+			
+				let prefs = "__UP_max_num_versions__";
+				console.log("Max num of versions to display: <" + prefs + ">");
+				if (prefs === "") {
+					return versionsByProjects;
+				} else {
+					let filteredVersions = versionsByProjects.slice(0, prefs);
+					return filteredVersions;
+				}
+			}
             
             
         </script>
