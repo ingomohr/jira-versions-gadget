@@ -6,7 +6,7 @@
     <plugin-info>
         <description>Provides a dashboard gadget to show versions</description>
         <vendor name="Ingo Mohr" url="http://www.ingomohr.org"/>
-        <version>1.2</version>
+        <version>1.1.1</version>
     </plugin-info>
 
     <!--
@@ -15,11 +15,13 @@
         disable/enable the gadget.
      -->
     <gadget key="jira-versions-gadget" name="Versions Gadget" location="gadget.xml"/>
-
+    
     <!-- Makes the gadget Locale messages available for the gadget's use. -->
     <resource type="download" name="i18n/ALL_ALL.xml" location="i18n/ALL_ALL.xml">
         <param name="content-type" value="text/xml; charset=UTF-8"/>
     </resource>
+    
+    <resource type="download" name="thumbnail.png" location="images/thumbnail.png"/>
 
     <!--
         Automatically finds all JAX-RS resource classes in the plugin and

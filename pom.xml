@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ingomohr.jira</groupId>
 	<artifactId>jira-versions-gadget</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>1.1.1</version>
 
 	<name>jira-versions-gadget</name>
 	<packaging>atlassian-plugin</packaging>
