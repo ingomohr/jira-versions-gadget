@@ -14,7 +14,7 @@ Note: This is a render-plugin only. i.e. it doesn't add nor store any data on yo
 
 
 ### Example
-#### Gadget w/o UP
+#### Gadget w/o User-Preferences
 ![Example](/doc/example.png)
 
 #### Gadget with User-Preferences Displayed
