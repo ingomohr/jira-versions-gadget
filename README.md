@@ -1,5 +1,6 @@
 # jira-versions-gadget
 This is a Jira plug-in with a dashboard gadget to list released versions.
+Note: This is a render-plugin only. i.e. it doesn't add nor store any data on your Jira server.
 
 ### Jira Version
 * Tested with Jira Software (Server) 8.5.1
